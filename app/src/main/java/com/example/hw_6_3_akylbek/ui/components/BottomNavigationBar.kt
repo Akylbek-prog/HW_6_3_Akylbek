@@ -1,7 +1,7 @@
 package com.example.hw_6_3_akylbek.ui.components
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
@@ -18,7 +18,7 @@ fun BottomNavigationBar(
     val items = listOf(
         BottomNavItem("Characters", "characters", Icons.Default.Person),
         BottomNavItem("Locations", "locations", Icons.Default.LocationOn),
-        BottomNavItem("Episodes", "episodes", Icons.Default.List)
+        BottomNavItem("Episodes", "episodes", Icons.AutoMirrored.Filled.List)
     )
 
     NavigationBar {

@@ -11,11 +11,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.example.hw_6_3_akylbek.ui.components.AppTopBar
 import com.example.hw_6_3_akylbek.ui.components.BottomNavigationBar
-import com.example.hw_6_3_akylbek.ui.screen.characters.CharacterDetailScreen
+import com.example.hw_6_3_akylbek.ui.screen.characters.detail.CharacterDetailScreen
 import com.example.hw_6_3_akylbek.ui.screen.characters.CharactersScreen
-import com.example.hw_6_3_akylbek.ui.screen.episodes.EpisodeDetailScreen
+import com.example.hw_6_3_akylbek.ui.screen.episodes.detail.EpisodeDetailScreen
 import com.example.hw_6_3_akylbek.ui.screen.episodes.EpisodesScreen
-import com.example.hw_6_3_akylbek.ui.screen.locations.LocationDetailScreen
+import com.example.hw_6_3_akylbek.ui.screen.locations.detail.LocationDetailScreen
 import com.example.hw_6_3_akylbek.ui.screen.locations.LocationsScreen
 
 class MainActivity : ComponentActivity() {
@@ -61,41 +61,21 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
                         when (currentScreen) {
-                            "characters" -> CharactersScreen { id ->
+                            "characters" -> CharactersScreen( { id ->
                                 selectedCharacterId = id
                                 currentScreen = "characterDetail"
-                            }
-
-                            "characterDetail" -> {
-                                val id = selectedCharacterId
-                                if (id != null) {
-                                    CharacterDetailScreen(id)
-                                }
-                            }
-
-                            "locations" -> LocationsScreen { id ->
+                            })
+                            "characterDetail" -> selectedCharacterId?.let { CharacterDetailScreen(it) }
+                            "locations" -> LocationsScreen( { id ->
                                 selectedLocationId = id
                                 currentScreen = "locationDetail"
-                            }
-
-                            "locationDetail" -> {
-                                val id = selectedLocationId
-                                if (id != null) {
-                                    LocationDetailScreen(id)
-                                }
-                            }
-
-                            "episodes" -> EpisodesScreen { id ->
+                            })
+                            "locationDetail" -> selectedLocationId?.let { LocationDetailScreen(it) }
+                            "episodes" -> EpisodesScreen( { id ->
                                 selectedEpisodeId = id
                                 currentScreen = "episodeDetail"
-                            }
-
-                            "episodeDetail" -> {
-                                val id = selectedEpisodeId
-                                if (id != null) {
-                                    EpisodeDetailScreen(id)
-                                }
-                            }
+                            })
+                            "episodeDetail" -> selectedEpisodeId?.let { EpisodeDetailScreen(it) }
                         }
                     }
                 }
